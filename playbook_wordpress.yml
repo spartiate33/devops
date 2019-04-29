@@ -2,7 +2,6 @@
   hosts: BDD
   roles:
     - role: BDD
-      MySQL_password: "P@ssw0rd"
       become: yes
 
 - name: Install WEBserver

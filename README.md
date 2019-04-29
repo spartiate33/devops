@@ -9,7 +9,7 @@ Rendu du projet de devops
 
 Copiez collez cette ligne dans votre terminal:
 ```
-ansible-playbook playbook_wordpress.yml -i INVENTORY
+ansible-playbook playbook_wordpress.yml -i config-ip
 ```
 Ce script à pour but d'installer sur les machines distantes: MySQL, Wordpress, apache2, php5.
 

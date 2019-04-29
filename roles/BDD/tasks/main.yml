@@ -10,7 +10,6 @@
   with_items:
     - mysql-server
     - python-mysqldb
-    - mysqli
   notify: start mysql
 
 - name: port de ouvert sur 3306
@@ -30,18 +29,14 @@
 
 - name: wordpress BDD
   mysql_db:
-    login_user: root
-    login_password: "{{ MySQL_password }}"
     db: "wordpress"
     state: present
 
 - name: wordpress user for {{groups.WEBserver | to_json | replace('"','') | replace('[','') | replace(']','')}}
   mysql_user:
-    login_user: root
-    login_password: "{{ MySQL_password }}"
     name: "wordpress"
     password: "P@ssw0rd"
-    host: "{{groups.webservers | to_json | replace('\"','') | replace('[','') | replace(']','')}}"
+    host: "{{groups.WEBserver | to_json | replace('\"','') | replace('[','') | replace(']','')}}"
     priv: 'wordpress.*:ALL'
     state: present
   notify: restart mysql
