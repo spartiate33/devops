@@ -1,0 +1,14 @@
+- name: Install BDD
+  hosts: BDD
+  roles:
+    - role: MySQL
+      MySQL_password: "P@ssw0rd"
+      become: yes
+
+- name: Install WEBserver
+  hosts: WEBserver
+  roles:
+    - role: WEBserver
+      become: yes
+    - role: Wordpress
+      become: yes
