@@ -1,0 +1,41 @@
+---
+- name: install wordpress
+  get_url:
+    url: http://wordpress.org/latest.tar.gz
+    dest: /tmp/latest.tar.gz
+    mode: 0440
+    owner: root
+    group: root
+
+- name: extraction du wordpress
+  unarchive:
+    src: /tmp/latest.tar.gz
+    dest: /tmp
+    remote_src: yes
+    owner: root
+    group: root
+
+- name: autoriser le port 80
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    match: tcp
+    destination_port: 80
+    jump: ACCEPT
+
+- name: supression de l'ancien index
+  file:
+    path: /var/www/html/index.html
+    state: absent
+
+- name: mise en place du wordpress dans le dossier html
+  shell: cp -r /tmp/wordpress/* /var/www/html/
+
+- name: installation du fichier de configuration de wordpress
+  template:
+    src: wp-config.php
+    dest: /var/www/html/wp-config.php
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache

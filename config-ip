@@ -1,5 +1,5 @@
 [BDD]
-10.33.10.1 ansible_connection=ssh ansible_user=vagrant
+192.168.56.11 ansible_connection=ssh ansible_user=vagrant
 
 [WEBserver]
-10.33.10.2 ansible_connection=ssh ansible_user=vagrant
+192.168.56.12 ansible_connection=ssh ansible_user=vagrant
